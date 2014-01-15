@@ -62,6 +62,10 @@ Parsing `src/main/lua/test.lua`...
                      |  '- COL_CALL
                      |     '- String='string2'
                      '- CHUNK
+
+> from Lua52Walker.assignment
+>   VAR_LIST=uniqueid_some_event
+>   EXPR_LIST=FUNCTION
 ```
 
 given that the file `src/main/lua/test.lua` contains:
