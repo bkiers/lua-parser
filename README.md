@@ -3,7 +3,7 @@
 A Lua 5.2 parser and AST walker using ANTLR 3.
 
 The grammar can be found in 
-[`src/main/antlr4/nl/bigo/luaparser`](https://github.com/bkiers/lua-parser/tree/master/src/main/antlr4/nl/bigo/luaparser).
+[`src/main/antlr3/nl/bigo/luaparser`](https://github.com/bkiers/lua-parser/tree/master/src/main/antlr3/nl/bigo/luaparser).
 
 Seeing the generated parser in action can be done by building
 a *fat* JAR of the project and then running it to parse a Lua
