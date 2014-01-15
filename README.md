@@ -11,14 +11,14 @@ file.
 
 # Get started
 
-### 0. clone this repository
+### 1. clone this repository
 
 ```bash
 git clone https://github.com/bkiers/lua-parser
 cd lua-parser
 ```
 
-### 1. generate the lexer and parser classes and build a *fat* JAR
+### 2. generate the lexer and parser classes and build a *fat* JAR
 
 ```bash
 mvn clean install package
