@@ -74,7 +74,8 @@ given that the file `src/main/lua/test.lua` contains:
 function uniqueid_some_event (e)
   if (e:HasString("string1")) then
     -- do something
-  end if(e:HasString("string2")) then
+  end 
+  if(e:HasString("string2")) then
     -- do something
   end
 end
