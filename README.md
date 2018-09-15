@@ -1,6 +1,6 @@
 # lua-parser
 
-A Lua 5.2 parser and AST walker using ANTLR 3.
+A Lua 5.3 parser and AST walker using ANTLR 3.
 
 The grammar can be found in 
 [`src/main/antlr3/nl/bigo/luaparser`](https://github.com/bkiers/lua-parser/tree/master/src/main/antlr3/nl/bigo/luaparser).
