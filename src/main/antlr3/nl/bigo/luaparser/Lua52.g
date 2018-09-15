@@ -62,6 +62,7 @@ tokens {
   Minus     = '-';
   Mult      = '*';
   Div       = '/';
+  FloorDiv  = '//';
   Mod       = '%';
   Pow       = '^';
   Length    = '#';
@@ -69,6 +70,11 @@ tokens {
   NEq       = '~=';
   LTEq      = '<=';
   GTEq      = '>=';
+  BitRShift = '>>';
+  BitLShift = '<<';
+  BitAnd    = '&';
+  BitOr     = '|';
+  Tilde     = '~';
   LT        = '<';
   GT        = '>';
   Assign    = '=';
@@ -91,6 +97,7 @@ tokens {
   LOCAL_ASSIGNMENT;
   CONDITION;
   UNARY_MINUS;
+  BIT_NOT;
   CALL;
   COL_CALL;
   INDEX;
@@ -318,6 +325,26 @@ ret_stat
  : Return expr_list? ';'? -> ^(Return expr_list?)
  ;
 
+/*
+3.4.8 – Precedence
+
+Operator precedence in Lua follows the table below, from lower to higher priority:
+
+     or
+     and
+     <     >     <=    >=    ~=    ==
+     |
+     ~
+     &
+     <<    >>
+     ..
+     +     -
+     *     /     //    %
+     unary operators (not   #     -     ~)
+     ^
+
+https://www.lua.org/manual/5.3/manual.html
+*/
 expr
  : or_expr
  ;
@@ -331,7 +358,23 @@ and_expr
  ;
 
 rel_expr
- : concat_expr ((LT | GT | LTEq | GTEq | NEq | Eq)^ concat_expr)?
+ : bit_or_expr ((LT | GT | LTEq | GTEq | NEq | Eq)^ bit_or_expr)?
+ ;
+
+bit_or_expr
+ : bit_excl_or_expr (BitOr^ bit_excl_or_expr)*
+ ;
+
+bit_excl_or_expr
+ : bit_and_expr (Tilde^ bit_and_expr)*
+ ;
+
+bit_and_expr
+ : bit_shift_expr (BitAnd^ bit_shift_expr)*
+ ;
+
+bit_shift_expr
+ : concat_expr ((BitRShift | BitLShift)^ concat_expr)*
  ;
 
 concat_expr
@@ -343,13 +386,14 @@ add_expr
  ;
 
 mult_expr
- : unary_expr ((Mult | Div | Mod)^ unary_expr)*
+ : unary_expr ((Mult | Div | Mod | FloorDiv)^ unary_expr)*
  ;
 
 unary_expr
  : Minus unary_expr -> ^(UNARY_MINUS unary_expr)
  | Length pow_expr  -> ^(Length pow_expr)
  | Not unary_expr   -> ^(Not unary_expr)
+ | Tilde pow_expr   -> ^(BIT_NOT pow_expr)
  | pow_expr
  ;
 

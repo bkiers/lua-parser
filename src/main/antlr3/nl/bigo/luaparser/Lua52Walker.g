@@ -115,16 +115,23 @@ expr
  | ^(GTEq a=expr b=expr)
  | ^(NEq a=expr b=expr)
  | ^(Eq a=expr b=expr)
+ | ^(BitOr a=expr b=expr)
+ | ^(Tilde a=expr b=expr) // bitwise exclusive OR
+ | ^(BitAnd a=expr b=expr)
+ | ^(BitRShift a=expr b=expr)
+ | ^(BitLShift a=expr b=expr)
  | ^(DotDot a=expr b=expr)
  | ^(Add a=expr b=expr)
  | ^(Minus a=expr b=expr)
  | ^(Mult a=expr b=expr)
  | ^(Div a=expr b=expr)
+ | ^(FloorDiv a=expr b=expr)
  | ^(Mod a=expr b=expr)
  | ^(Pow a=expr b=expr)
  | ^(UNARY_MINUS a=expr)
  | ^(Length a=expr)
  | ^(Not a=expr)
+ | ^(BIT_NOT a=expr)
  | Name
  | DotDotDot
  | Number
