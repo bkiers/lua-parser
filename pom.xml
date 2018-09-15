@@ -11,7 +11,7 @@
   <name>lua-parser</name>
 
   <properties>
-    <antlr3.version>3.5</antlr3.version>
+    <antlr3.version>3.5.2</antlr3.version>
   </properties>
 
   <dependencies>
